@@ -4,22 +4,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the Dungeon of Doom!");
         GameLogic game = new GameLogic();
-        System.out.println("Here are the game protocol commands:");
-        System.out.println("|---------|-------------------------------------------------|");
-        System.out.println("| Command | Action                                          |");
-        System.out.println("|---------|-------------------------------------------------|");
-        System.out.println("| HELLO   | Total amount of gold required to win            |");
-        System.out.println("| GOLD    | Displays current gold owned                     |");
-        System.out.println("| PICKUP  | Picks up the gold in given location             |");
-        System.out.println("| MOVE    | Move <direction>. Direction can be N, S, E or W.|");
-        System.out.println("| LOOK    | Show the map around the player                  |");
-        System.out.println("| QUIT    | Ends the game                                   |");
-        System.out.println("|---------|-------------------------------------------------|");
-        System.out.println("Enter above commands to play the game :>");
+        Command.printValidCommands();
         List<String> validCommands = Arrays.asList("HELLO", "LOOK", "MOVE N", "MOVE S", "MOVE E", "MOVE W", "PICKUP", "QUIT");
-        String choice = game.userInput();
+        String choice;
         while (true)
         {
+            choice = game.userInput();
             if (validCommands.contains(choice))
             {
                 String arr[] = choice.split(" ", 2);
@@ -57,9 +47,6 @@ public class Main {
 //            movePlayer(input, botPlayer);
             // Useful to turn this on if you want to see what happens behind the scenes every turn!!
             game.printMap();
-
-           choice = game.userInput();
-
         }
     }
 }

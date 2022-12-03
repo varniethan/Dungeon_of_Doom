@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21f10112-a1a3-4c6e-bc64-992e2c940a97" name="Changes" comment="Human Player Working">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace-varniethan’s MacBook Air.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace-varniethan’s iMac.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dungeon_of_Doom_2022.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Bot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/large_example_map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/maps/large_example_map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/maps/medium_example_map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/maps/small_example_map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/medium_example_map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/small_example_map.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HumanPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +81,7 @@
       <workItem from="1669974402462" duration="2915000" />
       <workItem from="1670011233452" duration="7523000" />
       <workItem from="1670058697536" duration="11133000" />
-      <workItem from="1670074371523" duration="423000" />
+      <workItem from="1670074371523" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project setup">
       <created>1669488405640</created>
@@ -105,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669488405640</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Human Player Working">
+      <created>1670074813247</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670074813247</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

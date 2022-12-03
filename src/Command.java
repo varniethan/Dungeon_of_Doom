@@ -59,4 +59,20 @@ public class Command {
         }
         System.exit(1);
     }
+
+    public static void printValidCommands()
+    {
+        System.out.println("Here are the game protocol commands:");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("| Command | Action                                          |");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("| HELLO   | Total amount of gold required to win            |");
+        System.out.println("| GOLD    | Displays current gold owned                     |");
+        System.out.println("| PICKUP  | Picks up the gold in given location             |");
+        System.out.println("| MOVE    | Move <direction>. Direction can be N, S, E or W.|");
+        System.out.println("| LOOK    | Show the map around the player                  |");
+        System.out.println("| QUIT    | Ends the game                                   |");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("Enter above commands to play the game :>");
+    }
 }
