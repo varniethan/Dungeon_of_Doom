@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21f10112-a1a3-4c6e-bc64-992e2c940a97" name="Changes" comment="Human Player Working">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="21f10112-a1a3-4c6e-bc64-992e2c940a97" name="Changes" comment="Placed the command print in the commands class">
+      <change beforePath="$PROJECT_DIR$/src/large_example_map.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medium_example_map.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/small_example_map.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,7 @@
       <workItem from="1669974402462" duration="2915000" />
       <workItem from="1670011233452" duration="7523000" />
       <workItem from="1670058697536" duration="11133000" />
-      <workItem from="1670074371523" duration="635000" />
+      <workItem from="1670074371523" duration="927000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project setup">
       <created>1669488405640</created>
@@ -97,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670074813247</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Placed the command print in the commands class">
+      <created>1670075075969</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670075075969</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +124,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial project setup" />
     <MESSAGE value="Human Player Working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Human Player Working" />
+    <MESSAGE value="Placed the command print in the commands class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Placed the command print in the commands class" />
   </component>
 </project>
