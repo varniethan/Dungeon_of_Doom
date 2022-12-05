@@ -188,35 +188,31 @@ public class Map {
         return this.lengthHorizontal;
     }
 
-    public int[] updateMap(int[] newPosition, int[] currentPlayerPosition, char replaceChar)
+    public int[] updateMap(int[] newPosition, int[] currentPlayerPosition, char replaceChar, char playerType)
     {
-        char playerType = 'P';
         int x = newPosition[1];
         int y = newPosition[0];
-        if (playerType == 'P')
+        if (map[y][x] != '#')
         {
-            if (map[y][x] != '#')
-            {
-                map[currentPlayerPosition[0]][currentPlayerPosition[1]] = replaceChar;
-                map[y][x] = 'P';
-                currentPlayerPosition[0] = y;
-                currentPlayerPosition[1] = x;
-                return currentPlayerPosition;
-            }
+            map[currentPlayerPosition[0]][currentPlayerPosition[1]] = replaceChar;
+            map[y][x] = playerType;
+            currentPlayerPosition[0] = y;
+            currentPlayerPosition[1] = x;
+            return currentPlayerPosition;
         }
         return newPosition;
-//        else if (playerType == 'B')
-//        {
-//            if (map[y][x] != 'P' || map[y][x] != 'G' || map[y][x] != 'E'||map[y][x] != '#')
-//            {
-//                randomPlayerPosition[0] = y;
-//                randomPlayerPosition[1] = x;
-//                map[y][x] = 'P';
-//                return randomPlayerPosition;
-//            }
-//        }
-
     }
+
+    public void replaceChar(int[] position, char replaceChar)
+    {
+        map[position[0]][position[1]] = replaceChar;
+    }
+
+    public char getCharAtPosition(int y, int x)
+    {
+        return map[y][x];
+    }
+
 
     public boolean isValidMove(int[] newPosition)
     {

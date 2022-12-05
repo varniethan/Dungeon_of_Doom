@@ -1,4 +1,3 @@
-import javax.print.DocFlavor;
 import java.io.*;
 import java.util.*;
 
@@ -9,17 +8,20 @@ import java.util.*;
 public class GameLogic {
 
     /* Reference to the map being used */
-    protected Map map;
-
-    protected HumanPlayer player;
-    protected Bot bot;
-//    private int[] playerPosition;
+    private Map map;
+    private HumanPlayer player;
+    private Bot bot;
+    private int[] botCoords;
+    private int[] playerCoords;
     public char previousChar;
+    private List<String> validCommands;
 
     /**
      * Default constructor
      */
-    public GameLogic() {
+    public GameLogic()
+    {
+        this.validCommands = Arrays.asList("HELLO", "LOOK", "MOVE N", "MOVE S", "MOVE E", "MOVE W", "PICKUP", "QUIT");
         setUpGame();
 
     }
@@ -35,22 +37,15 @@ public class GameLogic {
     }
 
     /**
-     * Get all the files avaialbe in the maps folder
+     * Returns the gold required to win.
      *
-     * @return : list of files.
+     * @return : Gold required to win.
      */
-    public String[] getListFiles(String filePath)
+    public String hello()
     {
-        File directoryPath = new File(filePath);
-        String fileList[] = directoryPath.list();
-        return fileList;
+        return null;
     }
 
-    /**
-     * Get file choice
-     *
-     * @return : integer choice of the file.
-     */
     public int getFileChoice(String fileList[])
     {
         System.out.println("Select the number of the map you want to play. Enter 0 to load the default map :> ");
@@ -62,7 +57,7 @@ public class GameLogic {
             System.out.println(file);
         }
         Scanner userInput = new Scanner(System.in);
-        int option;
+        int option=-1;
         while (true)
         {
             if (userInput.hasNextInt())
@@ -88,18 +83,19 @@ public class GameLogic {
         return option;
     }
 
-    public String userInput()
+    /**
+     * Get all the files avaialbe in the maps folder
+     *
+     * @return : list of files.
+     */
+    public String[] getListFiles(String filePath)
     {
-        Scanner userInput = new Scanner(System.in);
-        String command = userInput.nextLine().trim().toUpperCase();
-        return command;
+        File directoryPath = new File(filePath);
+        String fileList[] = directoryPath.list();
+        return fileList;
     }
 
-    /**
-     * Set up the game
-     *
-     * @return : true if all set up correctly.
-     */
+
     public void setUpGame()
     {
         String[] fileList = getListFiles("./src/maps");
@@ -112,55 +108,109 @@ public class GameLogic {
         {
             map = new Map(fileList[option-1]);
         }
-        player = new HumanPlayer(map.randomPlayerPosition('P'));
-        bot = new Bot(map.randomPlayerPosition('B'), map.getBotMap());
+        player = new HumanPlayer(map.randomPlayerPosition('P'), this.map);
+        bot = new Bot(map.randomPlayerPosition('B'), this.map);
         player.setCurrentPosition(map.getCharPosition('P'));
         bot.setCurrentPosition(map.getCharPosition('B'));
     }
 
-
-    public boolean moveCommand(char playerType, char direction) {
-        int[] newPlayerPosition = player.move(direction, this.previousChar, this.map);
-        if(map.isValidMove(newPlayerPosition))
-        {
-            this.movePlayer(newPlayerPosition);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public int pickupCommand(char playerType)
+    public String userInput()
     {
-        int newGold = player.pickup(this.previousChar);
-        if(newGold >= 0)
-        {
-            this.previousChar = '.';
-            return newGold;
-        }
-        else
-        {
-            return -1;
-        }
-    }
-
-    public void movePlayer(int[] newPosition)
-    {
-        int[] currentPlayerPosition = map.getCharPosition('P');
-        char replaceChar = '.';
-        if(this.previousChar == 'G' || this.previousChar == 'E')
-        {
-            replaceChar = this.previousChar;
-        }
-        this.previousChar = map.getChatAtPosition(newPosition[0], newPosition[1]);
-        map.updateMap(newPosition, currentPlayerPosition, replaceChar);
+        Scanner userInput = new Scanner(System.in);
+        return userInput.nextLine().toUpperCase();
     }
 
     public boolean checkWinningCondition()
     {
-        return player.getGoldOwned() == map.getGoldRequired();
+        if (player.getGoldOwned() == map.getGoldRequired())
+        {
+            return true;
+        }
+        return  false;
+    }
+    public void play()
+    {
+        String choice;
+        while (true)
+        {
+            choice = this.userInput();
+            if (this.validCommands.contains(choice))
+            {
+                String[] arr = choice.split(" ", 2);
+                String command = arr[0];
+                switch (command) {
+                    case "HELLO":
+                        System.out.println("Gold to win: "+ map.getGoldRequired());
+                        break;
+                    case "GOLD":
+                        System.out.println("Gold owned: "+player.getGoldOwned());
+                        break;
+                    case "PICKUP":
+                        int newGoldOwned = player.pickup();
+                        if (newGoldOwned != -1)
+                        {
+                            System.out.println("SUCCESS: Gold owned " + newGoldOwned);
+                        }
+                        else
+                        {
+                            System.out.println("FAIL");
+                        }
+                        break;
+                    case "MOVE":
+                        if(player.move(choice.charAt(5)))
+                        {
+                            System.out.println("SUCCESS");
+                        }
+                       else
+                        {
+                            System.out.println("FAIL");
+                        }
+                        break;
+                    case "LOOK":
+                        for(char[] x : player.look('P'))
+                        {
+                            for (char y : x)
+                            {
+                                System.out.print(y);
+                            }
+                            System.out.println();
+                        }
+                        break;
+                    case "QUIT":
+                        if(this.checkWinningCondition())
+                        {
+                            System.out.println("WIN");
+                        }
+                        else
+                        {
+                            System.out.println("LOST");
+                        }
+                        System.exit(0);
+                        break;
+                }
+            }
+            else
+            {
+                System.out.println("Command FAILED.");
+            }
+
+            choice = bot.getNextAction();
+            String[] arr = choice.split(" ", 2);
+            String command = arr[0];
+            System.out.println(command);
+            System.out.println(choice);
+            if(command.equals("MOVE"))
+            {
+                System.out.println("BOT MOVE ");
+                bot.move(choice.charAt(5));
+            }
+            else
+            {
+                bot.setLastMapMemory(bot.look('B'));
+            }
+
+            printMap();
+        }
     }
 
     public void printMap()
@@ -175,9 +225,22 @@ public class GameLogic {
         }
     }
 
-//
-//    public static void main(String[] args) {
-//        GameLogic logic = new GameLogic();
-//    }
+    public static void main(String[] args)
+    {
+        System.out.println("Welcome to the Dungeon of Doom!");
+        GameLogic game = new GameLogic();
+        System.out.println("Here are the game protocol commands:");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("| Command | Action                                          |");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("| HELLO   | Total amount of gold required to win            |");
+        System.out.println("| GOLD    | Displays current gold owned                     |");
+        System.out.println("| PICKUP  | Picks up the gold in given location             |");
+        System.out.println("| MOVE    | Move <direction>. Direction can be N, S, E or W.|");
+        System.out.println("| LOOK    | Show the map around the player                  |");
+        System.out.println("| QUIT    | Ends the game                                   |");
+        System.out.println("|---------|-------------------------------------------------|");
+        System.out.println("Enter above commands to play the game :>");
+        game.play();
+    }
 }
-

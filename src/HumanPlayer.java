@@ -1,13 +1,10 @@
-/**
- * Runs the game with a human player and contains code needed to read inputs.
- *
- */
 public class HumanPlayer extends Player
 {
     protected int goldOwned;
-    public HumanPlayer(int[] currentPosition)
+    protected char previousChar;
+    public HumanPlayer(int[] currentPosition, Map map)
     {
-        super(currentPosition);
+        super(currentPosition, map);
         this.goldOwned = 0;
     }
 
@@ -20,11 +17,28 @@ public class HumanPlayer extends Player
     {
         this.goldOwned += 1;
     }
-    public int[] move(char direction, char previousChar, Map map)
+    public int pickup()
     {
+//        int[] position = this.getCurrentPosition();
+        if(this.previousChar == 'G')
+        {
+            this.setGoldOwned();
+            this.previousChar = '.';
+            return this.getGoldOwned();
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    public boolean move(char direction)
+    {
+        this.setCurrentPosition(map.getCharPosition('P'));
         int[] newPlayerPosition = new int[2];
         int[] oldPlayerPosition = this.getCurrentPosition();
-        switch (direction) {
+        switch (direction)
+        {
             case 'N':
                 newPlayerPosition[0] = oldPlayerPosition[0] - 1;
                 newPlayerPosition[1] = oldPlayerPosition[1];
@@ -45,21 +59,22 @@ public class HumanPlayer extends Player
                 newPlayerPosition[0] =  -1;
                 newPlayerPosition[1] = -1;
         }
-        return newPlayerPosition;
-    }
-
-
-    public int pickup(char previousChar)
-    {
-        int[] position = this.getCurrentPosition();
-        if(previousChar == 'G')
+        if(map.isValidMove(newPlayerPosition))
         {
-            this.setGoldOwned();
-            return this.getGoldOwned();
+            int[] currentPlayerPosition = map.getCharPosition('P');
+            char replaceChar = '.';
+            if(this.previousChar == 'G' || this.previousChar == 'E')
+            {
+                replaceChar = this.previousChar;
+            }
+            this.previousChar = map.getCharAtPosition(newPlayerPosition[0], newPlayerPosition[1]);
+            System.out.println(this.previousChar);
+            map.updateMap(newPlayerPosition, currentPlayerPosition, replaceChar, 'P');
+            return true;
         }
         else
         {
-            return -1;
+            return false;
         }
     }
 }

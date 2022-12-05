@@ -1,12 +1,16 @@
 public class Player {
- protected int[] currentPosition;
 
- public Player(int[] currentPosition)
-     {
-         this.currentPosition = currentPosition;
-     }
+    protected int[] currentPosition;
 
 
+    protected Map map;
+    public Player(int[] currentPosition, Map map)
+    {
+
+        this.currentPosition = currentPosition;
+        this.map = map;
+
+    }
 
     public int[] getCurrentPosition()
     {
@@ -18,14 +22,18 @@ public class Player {
         this.currentPosition = newPosition;
     }
 
-    public char[][] look(Map map)
+
+
+
+
+    public char[][] look(char charToLook)
     {
         char[][] lookMap = new char[5][5];
-        this.setCurrentPosition(map.getCharPosition('P'));
+        this.setCurrentPosition(map.getCharPosition(charToLook));
 //        System.out.println(map.getPlayerPosition()[0]);
 //        System.out.println(map.getPlayerPosition()[1]);
-        int x = map.getCharPosition('P')[1];
-        int y = map.getCharPosition('P')[0];
+        int x = map.getCharPosition(charToLook)[1];
+        int y = map.getCharPosition(charToLook)[0];
         if (x-2 < 0)
         {
             x = 2;
@@ -56,9 +64,4 @@ public class Player {
         }
         return lookMap;
     }
-
-
-
-
 }
-
